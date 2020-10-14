@@ -1,0 +1,93 @@
+<?php
+$translate = $this->plugin('translate');
+?>
+<div class="preview-block">
+
+<?php if ($this->heading): ?>
+<h2><?php echo $this->heading; ?></h2>
+<?php endif; ?>
+
+<ul class="resource-list preview">
+<?php
+$headingTerm = $this->siteSetting('browse_heading_property_term');
+$bodyTerm = $this->siteSetting('browse_body_property_term');
+foreach ($this->resources as $resource):
+    $heading = $headingTerm ? $resource->value($headingTerm, ['default' => $translate('[Untitled]')]) : $resource->displayTitle();
+    $body = $bodyTerm ? $resource->value($bodyTerm) : $resource->displayDescription();
+    
+
+    // Show tags
+    // Get browsable tags from Metadata Browse
+    if ($this->setting('metadata_browse_use_globals', false)) {
+        $propertyIds = $this->setting('metadata_browse_properties', []);
+    }
+    else
+    {
+        $propertyIds = $this->siteSetting('metadata_browse_properties', []);
+    }
+    
+    if(!count($propertyIds))
+    {
+        $propertyIds = $this->setting('metadata_browse_properties', []);
+    }
+    $showLabel = true;
+    
+    if(count($propertyIds))
+    {
+        $vals = $resource->values();
+        $tagHtml = '';
+        foreach ($vals as $value)
+        {
+            if(in_array($value['property']->id(), $propertyIds)===true)
+            {
+                $fields = $value['values'];
+                if(($fields!=null)&&(count($fields)))
+                {
+                    $tagHtml .= '<div class="tag-group ' . str_replace(':', '\:', $value['property']->term()) . '">';
+                    $f_id = $value['property']->id();
+                    
+                    if($showLabel)
+                    {
+                        $label = $value['property']->label();
+                        $tagHtml .= '<span class="tag-label">'.$label.'</span>';
+                    }
+                    foreach ($fields as $val)
+                    {
+                        try
+                        {
+                            if($val)
+                            {
+                                // To make the field browsable with a link
+                                $query = ['query' => ['Search' => '', 'property[0][property]' => $f_id, 'property[0][type]' => 'eq', 'property[0][text]' => strval($val)]];
+                                $tagHtml .= $this->hyperlink(strval($val), $this->url('site/resource', ['controller' => 'item', 'action' => 'browse'], $query, true), ['class' => 'tag']);
+                            }
+                        } catch (\Throwable $th) {
+                        }
+                    }
+                    $tagHtml .= '</div>';
+                }
+            }        
+        }
+    }
+
+?>
+    <li class="<?php echo $this->resourceType; ?> resource">
+        <?php echo $resource->linkRaw($this->thumbnail($resource, 'medium', ['title' => $heading])); ?>
+        <h4><?php echo $resource->link($heading); ?></h4>
+        <?php if ($body): ?>
+        <div class="description"><?php echo $body; ?></div>
+        <?php endif; ?>
+		<?php if(!empty($tagHtml)){ ?> <div class="tags"><?php echo $tagHtml; ?></div> <?php } ?>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<?php
+if ($this->linkText):
+    echo $this->hyperlink($this->linkText, $this->url(
+        'site/resource', ['controller' => $this->resourceType, 'action' => 'browse'], ['query' => $this->query], true
+    ));
+endif;
+?>
+
+</div>

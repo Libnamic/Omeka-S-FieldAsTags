@@ -4,6 +4,8 @@ Fields as Tags enables to show certain metadata fields as traditional browsable 
 
 This module uses the settings from MetadataBrowse, from which it takes the fields to be used as tags.
 
+This development was commissioned for the project [**HistSex.org**](https://HistSex.org), funded by ***American Library Association's Carnegie-Whitney Grant***.
+
 ![Browsable tags](https://assets.libnamic.com/omeka/modules/Omeka-S-FieldAsTags/1.png)
 
 The tags will be shown next to the field name and will be browsable.

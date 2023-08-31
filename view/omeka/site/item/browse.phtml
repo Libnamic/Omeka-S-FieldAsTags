@@ -61,22 +61,24 @@ endif;
 <?php
 $headingTerm = $this->siteSetting('browse_heading_property_term');
 $bodyTerm = $this->siteSetting('browse_body_property_term');
+
+// Fields as tags
+// Show tags
+$showLabel = true;
+$metadata_browse_use_globals = $this->setting('metadata_browse_use_globals') ?? true;
+$siteTagIds = $this->siteSetting('metadata_browse_properties')??[];
+if($metadata_browse_use_globals && count($siteTagIds)==0){
+    $tagIds = $this->setting('metadata_browse_properties')??[];
+}else{
+    $tagIds = $siteTagIds;
+}
+// ---- Fields as tags
+
 foreach ($items as $item):
     $heading = $headingTerm ? $item->value($headingTerm, ['default' => $translate('[Untitled]'), 'lang' => $valueLang]) : $item->displayTitle(null, $valueLang);
     $body = $bodyTerm ? $item->value($bodyTerm, ['lang' => $valueLang]) : $item->displayDescription(null, $valueLang);
-    // Fields as tags
-    // Show tags
-    $metadata_browse_use_globals = $this->setting('metadata_browse_use_globals') ?? true;
-    $siteTagIds = $this->siteSetting('metadata_browse_properties')??'[]';
-    if($metadata_browse_use_globals && count($siteTagIds)==0){
-        $tagIds = $this->setting('browse_heading_property_term')??'[]';
-    }else{
-        $tagIds = $siteTagIds;
-    }
-    
-    
-    $showLabel = true;
-    
+
+    // Fields as tags      
     $vals = $item->values();
     $tagHtml = '';
     foreach ($vals as $tagTerm => $field)

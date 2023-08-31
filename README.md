@@ -21,7 +21,7 @@ The browsable fields are retrieved from the MetadataBrowse module settings. If t
 See the [Omeka S user manual](http://omeka.org/s/docs/user-manual/modules/) for user documentation.
 
 ## Installation
-Uncompress files from release zip or clone repository and rename module folder to FieldsAsTags.
+Uncompress files from release zip or clone repository and rename module folder to FieldsAsTags (note that in the github project name, there is no "s" after "Field", that does need to be added). 
 
 See Omeka S end user documentation for Installing a module in Omeka S and follow the instructions.
 

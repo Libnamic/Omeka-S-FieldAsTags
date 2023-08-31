@@ -4,7 +4,7 @@
  *
  * Allows to use fields as tags
  *
- * @copyright Jesús Bocanegra Linares, Libnamic, 2020
+ * @copyright Jesús Bocanegra Linares, Libnamic, 2023
  *
  */
 namespace FieldsAsTags;

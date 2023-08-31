@@ -4,7 +4,7 @@ Fields as Tags enables to show certain metadata fields as traditional browsable 
 
 This module uses the settings from MetadataBrowse, from which it takes the fields to be used as tags.
 
-This development was commissioned for the project [**HistSex.org**](https://HistSex.org), funded by ***American Library Association's Carnegie-Whitney Grant***.
+This development was originally commissioned for the project [**HistSex.org**](https://HistSex.org), funded by ***American Library Association's Carnegie-Whitney Grant***.
 
 ![Browsable tags](https://assets.libnamic.com/omeka/modules/Omeka-S-FieldAsTags/1.png)
 
@@ -15,6 +15,8 @@ There are two ways to use the module:
 ![Browsable tags](https://assets.libnamic.com/omeka/modules/Omeka-S-FieldAsTags/2.png)
 * The module also includes a page block, that can be used with any theme:
 ![Browsable tags](https://assets.libnamic.com/omeka/modules/Omeka-S-FieldAsTags/3.png)
+
+The browsable fields are retrieved from the MetadataBrowse module settings. If the site has any configured, those will be used. Otherwise, if the global setting is enabled in Metadata Browse, those fields will be used.
 
 See the [Omeka S user manual](http://omeka.org/s/docs/user-manual/modules/) for user documentation.
 
@@ -38,10 +40,10 @@ This module is published under the MIT License.
 
 ## Copyright
 
-* Copyright Jesús Bocanegra Linares, Libnamic, 2020
+* Copyright Jesús Bocanegra Linares, Libnamic, 2023
 
 
-[Libnamic]: https://omeka.libnamic.com/?ref=Omeka-S-FieldAsTags&pos=readme
+[Libnamic]: https://digitalhumanities.libnamic.com/?ref=Omeka-S-FieldAsTags&pos=readme
 [Module Support]: https://github.com/Libnamic/Omeka-S-FieldAsTags/issues
 [Omeka S]: https://omeka.org/s
 [Installing a module in Omeka S]: http://dev.omeka.org/docs/s/user-manual/modules/#installing-modules
